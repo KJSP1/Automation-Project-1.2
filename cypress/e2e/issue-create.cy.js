@@ -1,3 +1,5 @@
+import { faker } from "@faker-js/faker"
+
 describe('Issue create', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -107,8 +109,8 @@ describe('Issue create', () => {
 
       // Open issue type dropdown and choose Bug
       cy.get('[data-testid="select:type"]').click();
-      cy.get('[data-testid="select-option:bug"]')
-        .wait(1000)
+      cy.get('[data-testid="select-option:Bug"]')
+        .wait(3000)
         .trigger('mouseover')
         .trigger('click');
       cy.get('[data-testid="icon:bug"]').should('be.visible');
@@ -127,15 +129,73 @@ describe('Issue create', () => {
 
       // Assert that modal window is closed and successful message is visible
       cy.get('[data-testid="modal:issue-create"]').should('not.exist');
-      cy.contains('Issue has been successfully created.').should('be.visible');
+      cy.contains('My bug description').should('be.visible');
 
       // Reload the page to be able to see recently created issue
       // Assert that successful message has dissappeared after the reload
       cy.reload();
       cy.contains('Issue has been successfully created.').should('not.exist');
 
-    });
 
+    });
   });
 
-})
+
+  it('Test Case 2', () => {
+    const randomTitle = faker.lorem.word();
+    const randomDescription = faker.lorem.words();
+
+    // System finds modal for creating issue and does next steps inside of it
+    cy.get('[data-testid="modal:issue-create"]').within(() => {
+      // Type value to description input field using random data
+      cy.get('.ql-editor').type(randomDescription);
+      cy.get('.ql-editor').should('have.text', randomDescription);
+
+      // Type value to title input field using random data
+      cy.get('input[name="title"]').type(randomTitle);
+      cy.get('input[name="title"]').should('have.value', randomTitle);
+
+
+      // Open issue type dropdown and choose Story
+      cy.get('[data-testid="select:type"]').click();
+      cy.get('[data-testid="select-option:Story"]')
+        .wait(1000)
+        .trigger('mouseover')
+        .trigger('click');
+      cy.get('[data-testid="icon:story"]').should('be.visible');
+
+      // Open priority dropdown and choose Low
+      cy.get('[data-testid="select:priority"]').click();
+      cy.get('[data-testid="select-option:Low"]').click();
+
+      // Select Pickle Rick from reporter dropdown
+      cy.get('[data-testid="select:reporterId"]').click("bottomRight");
+      cy.get('[data-testid="select-option:Baby Yoda"]').click();
+
+
+      // Click on button "Create issue"
+      cy.get('button[type="submit"]').click();
+
+
+      // Assert that modal window is closed and successful message is visible
+      cy.get('[data-testid="modal:issue-create"]').should('not.exist');
+      cy.contains(randomDescription).should('be.visible');
+
+      // Reload the page to be able to see recently created issue
+      cy.reload();
+      // Assert that successful message has dissappeared after the reload
+      cy.contains('Issue has been successfully created.').should('not.exist');
+
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
+
