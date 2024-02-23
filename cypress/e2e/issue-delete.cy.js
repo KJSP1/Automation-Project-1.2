@@ -14,13 +14,13 @@ describe('Issue delete', () => {
 
     //add steps to delete issue
     it("Should open an issue and delete it successfully", () => {
+
         cy.get('[data-testid="modal:issue-details"]').should("be.visible");
         cy.get('[data-testid="icon:trash"]').click();
         cy.get('[data-testid="modal:confirm"]').should("be.visible");
         cy.get('[data-testid="modal:confirm"]').within(() => {
             cy.contains("Are you sure you want to delete this issue?").should(
-                "be.visible"
-            );
+                "be.visible")
             cy.contains("Once you delete, it's gone for good").should("be.visible");
             cy.contains("Delete issue").click()
 
@@ -47,4 +47,4 @@ describe('Issue delete', () => {
 
         });
     });
-})
+});
