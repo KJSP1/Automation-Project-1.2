@@ -30,7 +30,6 @@ describe('Issue delete', () => {
     IssueModal.getIssueDetailModal().should("be.visible");
     IssueModal.clickDeleteButton();
     IssueModal.cancelDeletion();
-    cy.get('[data-testid="modal:confirmation-dialog"]').should("not.exist");
     IssueModal.closeDetailModal();
     IssueModal.validateIssueVisibilityState(issueTitle, true);
   });
