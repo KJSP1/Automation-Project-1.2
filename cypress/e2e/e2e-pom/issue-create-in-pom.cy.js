@@ -1,14 +1,14 @@
 /**
  * This is an example file and approach for POM in Cypress
- */
+   */
 import IssueModal from "../../pages/IssueModal";
 
 describe('Issue create', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.url().should('eq', `${Cypress.env('baseUrl')}project/board`).then((url) => {
-    //open isse creation modal  
-    cy.visit(url + '/board?modal-issue-create=true');
+      //open isse creation modal  
+      cy.visit(url + '/board?modal-issue-create=true');
     });
   });
 

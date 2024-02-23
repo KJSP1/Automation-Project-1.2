@@ -1,6 +1,4 @@
-/**
- * This is an example file and approach for POM in Cypress
- */
+
 import IssueModal from "../../pages/IssueModal";
 
 describe('Issue delete', () => {
