@@ -34,3 +34,23 @@ describe('Issue delete', () => {
     IssueModal.validateIssueVisibilityState(issueTitle, true);
   });
 });
+
+//issue title, that we are testing with, saved into variable
+const issueTitle = "This is an issue of type: Task.";
+
+it.only("Should delete issue successfully", () => {
+  //add steps to delete issue
+  IssueModal.clickDeleteButton();
+  IssueModal.confirmDeletion();
+  IssueModal.validateAmountOfIssuesInBacklog(3);
+  IssueModal.ensureIssueIsNotVisibleOnBoard(issueTitle);
+});
+
+it.only("Should cancel deletion process successfully", () => {
+  //add steps to start deletion proces but cancel it
+  IssueModal.clickDeleteButton();
+  IssueModal.cancelDeletion();
+  IssueModal.closeDetailModal();
+  IssueModal.validateAmountOfIssuesInBacklog(4);
+  IssueModal.ensureIssueIsVisibleOnBoard(issueTitle);
+});
