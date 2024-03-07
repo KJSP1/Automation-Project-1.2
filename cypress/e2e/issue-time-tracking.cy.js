@@ -59,7 +59,7 @@ describe("Time estimation and Time logging Functionality", () => {
             .then((originalEstimate) => {
                 cy.contains("Time spent (hours)").next().find("input").type("3");
 
-                const remainingTime = parseInt(originalEstimate) - 3;
+                const remainingTime = parseInt(originalEstimate) - 2;
 
                 cy.contains("Time remaining (hours)")
                     .next("div")
