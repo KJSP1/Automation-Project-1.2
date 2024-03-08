@@ -46,7 +46,7 @@ describe("Time estimation and Time logging Functionality", () => {
             .should("have.value", "");
     });
 
-    it("Should add, update, remove logged time values", () => {
+    it("Should add, update, remove logged times", () => {
         getIssueDetailsModal().should("exist");
         cy.get('[data-testid="icon:stopwatch"]').click();
         cy.contains("Time spent (hours)").next().find("input").clear();
@@ -86,7 +86,6 @@ describe("Time estimation and Time logging Functionality", () => {
             .invoke("val")
             .then((originalEstimate) => {
                 cy.contains("Time spent (hours)").next().find("input").clear();
-
                 cy.contains("Time spent (hours)").next().find("input").type("2");
 
                 const originalEstimateValue = parseInt(originalEstimate);
